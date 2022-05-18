@@ -157,6 +157,7 @@ scale = Vector2( 0.2, 0.2 )
 z_index = 1
 frames = ExtResource( 1 )
 animation = "landing"
+frame = 1
 playing = true
 
 [node name="shadow" type="AnimatedSprite" parent="player"]

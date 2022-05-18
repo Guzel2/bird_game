@@ -79,6 +79,8 @@ func spawn_nature():
 	for x in range(0, 5):
 		spawn_lake(-tree_range + (randi() % tree_range*2), -tree_range + (randi() % tree_range*2))
 	
+	spawn_field(0, 0)
+	
 	print(cant_spawn_here)
 	
 	#trees
@@ -158,6 +160,19 @@ func spawn_lake(x, y):
 			offset = Vector2(6000, 6000)
 	cant_spawn_here.append([[x, y], [x + offset.x, y + offset.y]])
 	add_child(lake)
+
+func spawn_field(x, y):
+	var field = load("res://scenes/field.tscn").instance()
+	field.position = Vector2(x, y)
+	var animation = randi() % 1
+	var offset 
+	match animation:
+		0:
+			offset = Vector2(8000, 9000)
+		1:
+			offset = Vector2(6000, 6000)
+	cant_spawn_here.append([[x, y], [x + offset.x, y + offset.y]])
+	add_child(field)
 
 func spawn_tree(x, y):
 	var can_spawn = true
