@@ -61,7 +61,7 @@ func next_phase():
 			level.nest.modulate = Color(1, 1, 1, .8)
 		4:
 			level.nest.modulate = Color(1, 1, 1, 1)
-			camera.set_weather('snow')
+			camera.set_weather('rain')
 
 func _process(_delta):
 	if Input.is_action_pressed("ui_cancel"):
@@ -71,7 +71,6 @@ func _process(_delta):
 		pause_menu.rect_scale = player.scale
 		pause_menu.rect_position = player.position
 		player.animation.playing = false
-	
 
 func update_hud():
 	match phase:

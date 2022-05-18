@@ -12,7 +12,7 @@ var tree_threshhold = .725
 var tree_range = 40000
 var trees = []
 
-var dirt_threshhold = -.85
+var dirt_threshhold = -.825
 
 var branch_noise = OpenSimplexNoise.new()
 var branch_range = 600
@@ -32,13 +32,13 @@ var clouds_2 = []
 
 var worm_range = 600
 var worm_step = 100
-var worm_threshhold = -.725
+var worm_threshhold = -.72
 var worms = []
 
 var partner_threshhold = -.82
 var partners = []
 
-var deco_threshhold = -.78
+var deco_threshhold = -.75
 
 var nest
 
@@ -54,7 +54,7 @@ func ready():
 	
 	branch_noise.seed = randi()
 	branch_noise.octaves = 1
-	branch_noise.period = 10.0
+	branch_noise.period = 8.0
 	branch_noise.persistence = 0.2
 	
 	cloud_noise.seed = randi()
@@ -74,6 +74,12 @@ func _process(_delta):
 
 func spawn_nature():
 	set_tilemap()
+	
+	#lake
+	for x in range(0, 5):
+		spawn_lake(-tree_range + (randi() % tree_range*2), -tree_range + (randi() % tree_range*2))
+	
+	print(cant_spawn_here)
 	
 	#trees
 	var tree_x = -tree_range
@@ -139,21 +145,41 @@ func set_tilemap():
 				pos = 0
 				numbers.shuffle()
 
-func spawn_tree(x, y):
-	var tree = load("res://scenes/tree.tscn").instance()
-	tree.position = Vector2(x, y)
-	var animation = randi() % 3
+func spawn_lake(x, y):
+	var lake = load("res://scenes/lake.tscn").instance()
+	lake.position = Vector2(x, y)
+	var animation = randi() % 2
+	lake.animation = str(animation)
+	var offset 
 	match animation:
 		0:
-			tree.animation = 'oak'
+			offset = Vector2(5000, 5000)
 		1:
-			tree.animation = 'birch'
-		2:
-			tree.animation = 'pine'
+			offset = Vector2(6000, 6000)
+	cant_spawn_here.append([[x, y], [x + offset.x, y + offset.y]])
+	add_child(lake)
+
+func spawn_tree(x, y):
+	var can_spawn = true
+	for pos in cant_spawn_here:
+		if (x > pos[0][0] and x < pos[1][0]) and (y > pos[0][1] and y < pos [1][1]):
+			can_spawn = false
 	
-	trees.append(tree)
-	spawn_branches(tree, x, y)
-	add_child(tree)
+	if can_spawn == true:
+		var tree = load("res://scenes/tree.tscn").instance()
+		tree.position = Vector2(x, y)
+		var animation = randi() % 3
+		match animation:
+			0:
+				tree.animation = 'oak'
+			1:
+				tree.animation = 'birch'
+			2:
+				tree.animation = 'pine'
+		
+		trees.append(tree)
+		spawn_branches(tree, x, y)
+		add_child(tree)
 
 func spawn_branches(tree, x, y):
 	var branch_x = -branch_range
@@ -174,14 +200,20 @@ func spawn_branches(tree, x, y):
 				add_child(branch)
 
 func spawn_dirt_hill(x, y):
-	var dirt_hill = load("res://scenes/dirt_hill.tscn").instance()
-	dirt_hill.position = Vector2(x, y)
-	dirt_hill.rotation_degrees = randi() % 360
-	var animation = randi() % 2
-	dirt_hill.animation = str(animation)
-	add_child(dirt_hill)
+	var can_spawn = true
+	for pos in cant_spawn_here:
+		if (x > pos[0][0] and x < pos[1][0]) and (y > pos[0][1] and y < pos [1][1]):
+			can_spawn = false
 	
-	spawn_worms(x, y)
+	if can_spawn == true:
+			var dirt_hill = load("res://scenes/dirt_hill.tscn").instance()
+			dirt_hill.position = Vector2(x, y)
+			dirt_hill.rotation_degrees = randi() % 360
+			var animation = randi() % 2
+			dirt_hill.animation = str(animation)
+			add_child(dirt_hill)
+			
+			spawn_worms(x, y)
 
 func spawn_worms(x, y):
 	var worm_x = -worm_range
@@ -201,19 +233,31 @@ func spawn_worms(x, y):
 				add_child(worm)
 
 func spawn_partner(x, y):
-	var partner = load("res://scenes/partner.tscn").instance()
-	partner.position = Vector2(x, y)
-	partner.rotation_degrees = randi() % 360
-	partners.append(partner)
-	add_child(partner)
+	var can_spawn = true
+	for pos in cant_spawn_here:
+		if (x > pos[0][0] and x < pos[1][0]) and (y > pos[0][1] and y < pos [1][1]):
+			can_spawn = false
+	
+	if can_spawn == true:
+		var partner = load("res://scenes/partner.tscn").instance()
+		partner.position = Vector2(x, y)
+		partner.rotation_degrees = randi() % 360
+		partners.append(partner)
+		add_child(partner)
 
 func spawn_deco(x, y):
-	var deco = load("res://scenes/deco.tscn").instance()
-	deco.position = Vector2(x, y)
-	deco.rotation_degrees = randi() % 360
-	var animation = randi() % 7
-	deco.animation = str(animation)
-	add_child(deco)
+	var can_spawn = true
+	for pos in cant_spawn_here:
+		if (x > pos[0][0] and x < pos[1][0]) and (y > pos[0][1] and y < pos [1][1]):
+			can_spawn = false
+	
+	if can_spawn == true:
+		var deco = load("res://scenes/deco.tscn").instance()
+		deco.position = Vector2(x, y)
+		deco.rotation_degrees = randi() % 360
+		var animation = randi() % 7
+		deco.animation = str(animation)
+		add_child(deco)
 
 func spawn_cloud(x, y, factor):
 	var cloud = load("res://scenes/cloud.tscn").instance()
