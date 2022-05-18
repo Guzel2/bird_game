@@ -24,6 +24,11 @@ region = Rect2( 2000, 0, 1000, 1000 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "empty",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "eggs",
@@ -32,11 +37,6 @@ animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "full",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "empty",
 "speed": 5.0
 } ]
 
@@ -48,4 +48,4 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 5 )
-animation = "empty"
+animation = "full"

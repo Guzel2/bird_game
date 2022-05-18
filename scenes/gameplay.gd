@@ -54,13 +54,14 @@ func next_phase():
 	match phase:
 		1:
 			level.spawn_nest()
-			level.nest.modulate = Color(1, 1, 1, .55)
+			level.nest.modulate = Color(1, 1, 1, .4)
 		2:
-			level.nest.modulate = Color(1, 1, 1, .7)
+			level.nest.modulate = Color(1, 1, 1, .6)
 		3:
-			level.nest.modulate = Color(1, 1, 1, .85)
+			level.nest.modulate = Color(1, 1, 1, .8)
 		4:
 			level.nest.modulate = Color(1, 1, 1, 1)
+			camera.set_weather('snow')
 
 func _process(_delta):
 	if Input.is_action_pressed("ui_cancel"):

@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var parent = get_parent()
 onready var animation = $animation
 onready var shadow = $shadow
+onready var arrow = $arrow
 onready var level
 
 var dir = Vector2(0, 0)
@@ -42,6 +43,11 @@ func _process(_delta):
 	vertical_movement()
 	
 	adjusting_shadow()
+	
+	if parent.phase > 0:
+		var angel = (position - level.nest.position).normalized()
+		arrow.rotation = angel.angle() - PI/2
+		arrow.position = angel * -100
 
 func set_animation(ani):
 	animation.animation = ani
@@ -143,6 +149,7 @@ func _on_collect_area_area_entered(area):
 				set_animation('collecting')
 			if area == level.nest:
 				if parent.worm_count >= parent.worm_max:
+					parent.worm_count = 0
 					parent.next_phase()
 
 func _on_animation_animation_finished():
