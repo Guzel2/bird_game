@@ -5,6 +5,7 @@ onready var gameplay = $gameplay
 onready var titlescreen = $Titlescreen
 onready var pause_menu = $pause_menu
 onready var control_menu = $control_menu
+onready var hud = $hud
 
 func _ready():
 	for child in children:

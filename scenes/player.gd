@@ -43,6 +43,10 @@ func _process(_delta):
 	
 	adjusting_shadow()
 
+func set_animation(ani):
+	animation.animation = ani
+	animation.frame = 0
+
 func inputs():
 	dir = Vector2(0, 0)
 	if Input.is_action_pressed("ui_left"):
@@ -67,8 +71,7 @@ func inputs():
 	if swing_cooltimer <= 0:
 		if Input.is_action_pressed("ui_accept"):
 			height_change = verti_speed
-			animation.animation = 'flapping'
-			animation.frame = 0
+			set_animation('flapping')
 			swing_cooltimer = swing_cooldown
 	else:
 		swing_cooltimer -= 1
@@ -92,8 +95,7 @@ func vertical_movement():
 		new_height = ground_height
 		
 		if grounded == false:
-			animation.animation = 'landing'
-			animation.frame = 0
+			set_animation('landing')
 			grounded = true
 		
 	elif grounded == true:
@@ -124,21 +126,27 @@ func _on_collect_area_area_entered(area):
 					for partner in level.partners:
 						partner.queue_free()
 					parent.next_phase()
-		1:
+		1, 2, 3:
 			if area in level.branches and grounded:
-				area.queue_free()
-				parent.branch_count += 1
+				if parent.branch_count < parent.branch_max:
+					area.queue_free()
+					parent.branch_count += 1
+					set_animation('collecting')
+			if area == level.nest:
 				if parent.branch_count >= parent.branch_max:
+					parent.branch_count = 0
 					parent.next_phase()
-		2:
+		4, 5, 6:
 			if area in level.worms and grounded:
 				area.queue_free()
 				parent.worm_count += 1
+				set_animation('collecting')
+			if area == level.nest:
 				if parent.worm_count >= parent.worm_max:
 					parent.next_phase()
 
 func _on_animation_animation_finished():
 	if grounded:
-		animation.animation = 'walking'
+		set_animation('walking')
 	else:
-		animation.animation = 'gliding'
+		set_animation('gliding')

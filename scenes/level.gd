@@ -9,14 +9,14 @@ var cant_spawn_here = []
 var tree_noise = OpenSimplexNoise.new()
 var tree_step_size = 250
 var tree_threshhold = .725
-var tree_range = 20000
+var tree_range = 40000
 var trees = []
 
 var dirt_threshhold = -.85
 
 var branch_noise = OpenSimplexNoise.new()
-var branch_range = 400
-var branch_step = 100
+var branch_range = 600
+var branch_step = 125
 var branch_threshhold = -.75
 var branches = []
 
@@ -39,6 +39,8 @@ var partner_threshhold = -.82
 var partners = []
 
 var deco_threshhold = -.78
+
+var nest
 
 func ready():
 	randomize()
@@ -72,7 +74,6 @@ func _process(_delta):
 
 func spawn_nature():
 	set_tilemap()
-	
 	
 	#trees
 	var tree_x = -tree_range
@@ -234,6 +235,19 @@ func spawn_cloud(x, y, factor):
 		2:
 			clouds_2.append(cloud)
 	add_child(cloud)
+
+func spawn_nest():
+	var closest_distance = 100000
+	var closest_tree
+	for tree in trees:
+		if tree.position.distance_to(player.position) < closest_distance:
+			closest_distance = tree.position.distance_to(player.position)
+			closest_tree = tree
+	
+	var new_nest = load("res://scenes/nest.tscn").instance()
+	new_nest.position = closest_tree.position
+	nest = new_nest
+	add_child(new_nest)
 
 func change_height():
 	if player.height != player.new_height:
