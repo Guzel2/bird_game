@@ -1,0 +1,165 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://sprites/trees/Birch Sprite Sheat.PNG" type="Texture" id=1]
+[ext_resource path="res://sprites/trees/Oak Sprite Sheat.PNG" type="Texture" id=2]
+[ext_resource path="res://scenes/tree.gd" type="Script" id=3]
+[ext_resource path="res://sprites/trees/Pine Sprite Sheat.PNG" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1000, 0, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1000, 0, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1000, 0, 1000, 1000 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "oak",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 31 ), SubResource( 32 ) ],
+"loop": true,
+"name": "birch",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "pine",
+"speed": 0.0
+} ]
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 1000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1000, 1000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=34]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1000, 1000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 1000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1000, 1000, 1000, 1000 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "oak",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 33 ), SubResource( 34 ) ],
+"loop": true,
+"name": "birch",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 23 ), SubResource( 24 ) ],
+"loop": true,
+"name": "pine",
+"speed": 0.0
+} ]
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 2000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1000, 2000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=35]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 2000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=36]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1000, 2000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 2000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1000, 2000, 1000, 1000 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "oak",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 35 ), SubResource( 36 ) ],
+"loop": true,
+"name": "birch",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "pine",
+"speed": 0.0
+} ]
+
+[node name="tree" type="AnimatedSprite"]
+frames = SubResource( 2 )
+animation = "birch"
+script = ExtResource( 3 )
+
+[node name="branch" type="AnimatedSprite" parent="."]
+z_index = -1
+frames = SubResource( 14 )
+animation = "birch"
+
+[node name="log" type="AnimatedSprite" parent="."]
+z_index = -2
+frames = SubResource( 4 )
+animation = "pine"
