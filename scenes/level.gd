@@ -137,8 +137,8 @@ func spawn_nature():
 
 func set_tilemap():
 	var numbers = []
-	for _x in range(0, 3):
-		for y in range(0, 8):
+	for _x in range(0, 5):
+		for y in range(0, 9):
 			numbers.append(y)
 	
 	var pos = 0

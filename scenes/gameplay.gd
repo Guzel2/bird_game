@@ -57,7 +57,6 @@ func next_phase():
 	
 	match phase:
 		1:
-			camera.set_weather('snow', 0)
 			level.spawn_nest()
 			#level.nest.modulate = Color(1, 1, 1, .7)
 			level.nest.ani.animation = 'building'
@@ -74,7 +73,11 @@ func next_phase():
 			camera.play_cutscene('laying_egg')
 			level.nest.ani.animation = 'eggs'
 		5:
-			pass
+			for tree in level.trees:
+				tree.frame = 1
+				tree.tree_log.frame = 1
+				tree.tree_branches.frame = 1
+				tree.leaves.animation = tree.leaves.animation + '_autumn'
 		6:
 			camera.set_weather('rain', 45)
 			level.nest.ani.animation = 'full'

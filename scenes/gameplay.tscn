@@ -1,4 +1,4 @@
-[gd_scene load_steps=187 format=2]
+[gd_scene load_steps=188 format=2]
 
 [ext_resource path="res://sprites/bird/bird_sprite_sheet.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/camera.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://sprites/cutscenes/laying_egg.png" type="Texture" id=9]
 [ext_resource path="res://sprites/cutscenes/feeding_children.png" type="Texture" id=10]
 [ext_resource path="res://sprites/cutscenes/flying_away.png" type="Texture" id=11]
+[ext_resource path="res://sprites/ground_tiles/dirt_with_texture.png" type="Texture" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 27.0
@@ -895,7 +896,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="TileSet" id=11]
+[sub_resource type="TileSet" id=185]
 0/name = "dirt8.png 0"
 0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
@@ -952,11 +953,11 @@ animations = [ {
 3/shape_one_way_margin = 0.0
 3/shapes = [  ]
 3/z_index = 0
-4/name = "dirt8.png 4"
-4/texture = ExtResource( 6 )
+4/name = "dirt_with_texture.png 4"
+4/texture = ExtResource( 12 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
-4/region = Rect2( 4000, 0, 1000, 1000 )
+4/region = Rect2( 0, 0, 1000, 1000 )
 4/tile_mode = 0
 4/occluder_offset = Vector2( 0, 0 )
 4/navigation_offset = Vector2( 0, 0 )
@@ -966,11 +967,11 @@ animations = [ {
 4/shape_one_way_margin = 0.0
 4/shapes = [  ]
 4/z_index = 0
-5/name = "dirt8.png 5"
-5/texture = ExtResource( 6 )
+5/name = "dirt_with_texture.png 5"
+5/texture = ExtResource( 12 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 5000, 0, 1000, 1000 )
+5/region = Rect2( 1000, 0, 1000, 1000 )
 5/tile_mode = 0
 5/occluder_offset = Vector2( 0, 0 )
 5/navigation_offset = Vector2( 0, 0 )
@@ -980,11 +981,11 @@ animations = [ {
 5/shape_one_way_margin = 0.0
 5/shapes = [  ]
 5/z_index = 0
-6/name = "dirt8.png 6"
-6/texture = ExtResource( 6 )
+6/name = "dirt_with_texture.png 6"
+6/texture = ExtResource( 12 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
-6/region = Rect2( 6000, 0, 1000, 1000 )
+6/region = Rect2( 2000, 0, 1000, 1000 )
 6/tile_mode = 0
 6/occluder_offset = Vector2( 0, 0 )
 6/navigation_offset = Vector2( 0, 0 )
@@ -994,11 +995,11 @@ animations = [ {
 6/shape_one_way_margin = 0.0
 6/shapes = [  ]
 6/z_index = 0
-7/name = "dirt8.png 7"
-7/texture = ExtResource( 6 )
+7/name = "dirt_with_texture.png 7"
+7/texture = ExtResource( 12 )
 7/tex_offset = Vector2( 0, 0 )
 7/modulate = Color( 1, 1, 1, 1 )
-7/region = Rect2( 7000, 0, 1000, 1000 )
+7/region = Rect2( 3000, 0, 1000, 1000 )
 7/tile_mode = 0
 7/occluder_offset = Vector2( 0, 0 )
 7/navigation_offset = Vector2( 0, 0 )
@@ -1008,6 +1009,20 @@ animations = [ {
 7/shape_one_way_margin = 0.0
 7/shapes = [  ]
 7/z_index = 0
+8/name = "dirt_with_texture.png 8"
+8/texture = ExtResource( 12 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 4000, 0, 1000, 1000 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
 
 [node name="gameplay" type="Node2D"]
 z_index = -5
@@ -1023,7 +1038,7 @@ scale = Vector2( 0.2, 0.2 )
 z_index = 1
 frames = ExtResource( 1 )
 animation = "landing"
-frame = 1
+frame = 2
 playing = true
 
 [node name="shadow" type="AnimatedSprite" parent="player"]
@@ -1055,8 +1070,9 @@ script = ExtResource( 2 )
 [node name="cutscenes" type="AnimatedSprite" parent="camera"]
 visible = false
 frames = SubResource( 74 )
-animation = "flying_away"
-frame = 31
+animation = "laying_egg"
+frame = 38
+playing = true
 
 [node name="weather" type="AnimatedSprite" parent="camera"]
 scale = Vector2( 0.65, 0.65 )
@@ -1069,7 +1085,7 @@ script = ExtResource( 4 )
 
 [node name="tilemap" type="TileMap" parent="level"]
 z_index = -4
-tile_set = SubResource( 11 )
+tile_set = SubResource( 185 )
 cell_size = Vector2( 1000, 1000 )
 format = 1
 

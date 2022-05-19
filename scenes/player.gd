@@ -14,8 +14,8 @@ var height = 1000
 var new_height = height
 var height_change = -1
 var gravity = .22
-var max_fall_speed = -8
-var verti_speed = 7 #odl was 4
+var max_fall_speed = -10
+var verti_speed = 6 #odl was 4
 
 var swing_cooldown = 30
 var swing_cooltimer = 0
@@ -114,9 +114,11 @@ func vertical_movement():
 		if grounded == false and can_land:
 			set_animation('landing')
 			grounded = true
-		
 	elif grounded == true:
 		grounded = false
+	
+	if new_height > cloud_height_3:
+		new_height = cloud_height_3
 	
 	height_change -= gravity
 	if height_change < max_fall_speed:
@@ -140,7 +142,7 @@ func mission_completed():
 	arrow.visible = true
 
 func _on_collect_area_area_entered(area):
-	if area == level.nest and height < cloud_height_1:
+	if area == level.nest and height < treetop_height:
 		if mission_complete:
 			parent.next_phase()
 			parent.branch_count = 0
