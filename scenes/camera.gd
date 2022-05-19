@@ -15,11 +15,15 @@ func _process(_delta):
 	weather.scale = zoom * Vector2(.65, .65)
 	cutscene.scale = zoom
 
-func set_weather(animation):
-	weather.animation = animation
-	weather.playing = true
-	weather.visible = true
-	weather.rotation_degrees = 45
+func set_weather(animation, degree):
+	if animation == 'clear':
+		weather.playing = false
+		weather.visible = false
+	else:
+		weather.animation = animation
+		weather.playing = true
+		weather.visible = true
+		weather.rotation_degrees = degree
 
 func play_cutscene(animation):
 	cutscene.animation = animation

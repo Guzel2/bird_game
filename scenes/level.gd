@@ -43,7 +43,7 @@ var flys = []
 var partner_threshhold = -.82
 var partners = []
 
-var deco_threshhold = -.75
+var deco_threshhold = -.725
 
 var nest
 
@@ -299,7 +299,7 @@ func spawn_deco(x, y):
 		var deco = load("res://scenes/deco.tscn").instance()
 		deco.position = Vector2(x, y)
 		deco.rotation_degrees = randi() % 360
-		var animation = randi() % 7
+		var animation = randi() % 10
 		deco.animation = str(animation)
 		add_child(deco)
 
@@ -348,7 +348,6 @@ func change_height():
 			for tree in trees:
 				tree.self_modulate = Color(1, 1, 1, 0)
 				tree.tree_branches.self_modulate = Color(1, 1, 1, transparency)
-				tree.tree_log.visible = true
 		
 		elif player.height < player.treetop_height:
 			var transparency = float(player.height-player.branches_height)/float(player.treetop_height-player.branches_height)
@@ -357,11 +356,12 @@ func change_height():
 			for tree in trees:
 				tree.self_modulate = Color(1, 1, 1, transparency)
 				tree.tree_branches.visible = true
-				tree.tree_log.visible = false
+				tree.tree_log.visible = true
 		elif player.height < player.cloud_height_1:
 			for tree in trees:
 				tree.self_modulate = Color(1, 1, 1, 1)
 				tree.tree_branches.visible = false
+				tree.tree_log.visible = false
 		
 		elif player.height < player.cloud_height_2:
 			var transparency = float(player.height-player.cloud_height_1)/float(player.cloud_height_2-player.cloud_height_1)

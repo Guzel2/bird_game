@@ -57,11 +57,13 @@ func next_phase():
 	
 	match phase:
 		1:
+			camera.set_weather('snow', 0)
 			level.spawn_nest()
 			#level.nest.modulate = Color(1, 1, 1, .7)
 			level.nest.ani.animation = 'building'
 			level.nest.ani.frame = 0
 		2:
+			camera.set_weather('clear', 0)
 			#level.nest.modulate = Color(1, 1, 1, .8)
 			level.nest.ani.frame = 1
 		3:
@@ -74,7 +76,7 @@ func next_phase():
 		5:
 			pass
 		6:
-			camera.set_weather('rain')
+			camera.set_weather('rain', 45)
 			level.nest.ani.animation = 'full'
 			level.nest.ani.playing = true
 			for worm in level.worms:
