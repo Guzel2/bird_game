@@ -35,6 +35,11 @@ var worm_step = 100
 var worm_threshhold = -.72
 var worms = []
 
+var fly_noise = OpenSimplexNoise.new()
+var fly_step = 500
+var fly_threshhold = -.6
+var flys = []
+
 var partner_threshhold = -.82
 var partners = []
 
@@ -67,6 +72,11 @@ func ready():
 	cloud_2_noise.period = 120.0
 	cloud_2_noise.persistence = 0.3
 	
+	fly_noise.seed = randi()
+	fly_noise.octaves = 1
+	fly_noise.period = 15.0
+	fly_noise.persistence = 0.5
+	
 	spawn_nature()
 
 func _process(_delta):
@@ -79,9 +89,8 @@ func spawn_nature():
 	for x in range(0, 5):
 		spawn_lake(-tree_range + (randi() % tree_range*2), -tree_range + (randi() % tree_range*2))
 	
-	spawn_field(0, 0)
-	
-	print(cant_spawn_here)
+	print(len(flys))
+	#spawn_field(0, 0)
 	
 	#trees
 	var tree_x = -tree_range
@@ -160,17 +169,36 @@ func spawn_lake(x, y):
 			offset = Vector2(6000, 6000)
 	cant_spawn_here.append([[x, y], [x + offset.x, y + offset.y]])
 	add_child(lake)
+	
+	spawn_flys(x, y, offset)
+
+func spawn_flys(x, y, offset):
+	var fly_x = 0
+	while fly_x < offset.x:
+		fly_x += fly_step
+		var fly_y = 0
+		while fly_y < offset.y:
+			fly_y += fly_step
+			
+			var noise_value = fly_noise.get_noise_2d(fly_x + x, fly_y + y)
+			
+			if noise_value <= fly_threshhold:
+				var fly = load("res://scenes/fly.tscn").instance()
+				fly.position = Vector2(fly_x + x, fly_y + y)
+				fly.rotation_degrees = randi() % 360
+				flys.append(fly)
+				add_child(fly)
 
 func spawn_field(x, y):
 	var field = load("res://scenes/field.tscn").instance()
 	field.position = Vector2(x, y)
-	var animation = randi() % 1
+	var animation = randi() % 2
 	var offset 
 	match animation:
 		0:
 			offset = Vector2(8000, 9000)
 		1:
-			offset = Vector2(6000, 6000)
+			offset = Vector2(4000, 4000)
 	cant_spawn_here.append([[x, y], [x + offset.x, y + offset.y]])
 	add_child(field)
 
@@ -245,6 +273,7 @@ func spawn_worms(x, y):
 				worm.position = Vector2(worm_x + x, worm_y + y)
 				worm.rotation_degrees = randi() % 360
 				worms.append(worm)
+				worm.visible = false
 				add_child(worm)
 
 func spawn_partner(x, y):

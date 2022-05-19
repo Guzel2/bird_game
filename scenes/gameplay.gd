@@ -16,8 +16,10 @@ var partner_count = 0
 var partner_max = 1
 var branch_count = 0
 var branch_max = 5
+var fly_count = 0
+var fly_max = 4
 var worm_count = 0
-var worm_max = 5
+var worm_max = 4
 
 var space = '          '
 
@@ -50,18 +52,32 @@ func check_titlescreen(): #neue funktion um zu überprüfen ob sich das game im 
 func next_phase():
 	phase += 1
 	print('next_phase')
+	player.mission_complete = false
+	player.arrow.visible = false
 	
 	match phase:
 		1:
 			level.spawn_nest()
-			level.nest.modulate = Color(1, 1, 1, .4)
+			#level.nest.modulate = Color(1, 1, 1, .7)
+			level.nest.ani.animation = 'building'
+			level.nest.ani.frame = 0
 		2:
-			level.nest.modulate = Color(1, 1, 1, .6)
+			#level.nest.modulate = Color(1, 1, 1, .8)
+			level.nest.ani.frame = 1
 		3:
-			level.nest.modulate = Color(1, 1, 1, .8)
+			#level.nest.modulate = Color(1, 1, 1, .9)
+			level.nest.ani.frame = 2
 		4:
-			level.nest.modulate = Color(1, 1, 1, 1)
+			#level.nest.modulate = Color(1, 1, 1, 1)
+			level.nest.ani.animation = 'eggs'
+		5:
+			pass
+		6:
 			camera.set_weather('rain')
+			level.nest.ani.animation = 'full'
+			level.nest.ani.playing = true
+			for worm in level.worms:
+				worm.visible = true
 
 func _process(_delta):
 	if Input.is_action_pressed("ui_cancel"):

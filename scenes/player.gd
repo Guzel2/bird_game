@@ -33,6 +33,8 @@ var grounded = false
 
 var shadow_offset = Vector2(-10, 10)
 
+var mission_complete = false
+
 func ready():
 	level = parent.level
 
@@ -44,7 +46,7 @@ func _process(_delta):
 	
 	adjusting_shadow()
 	
-	if parent.phase > 0:
+	if mission_complete:
 		var angel = (position - level.nest.position).normalized()
 		arrow.rotation = angel.angle() - PI/2
 		arrow.position = angel * -100
@@ -122,35 +124,55 @@ func adjusting_shadow():
 	shadow.frame = animation.frame
 	shadow.animation = animation.animation
 
+func mission_completed():
+	mission_complete = true
+	arrow.visible = true
+
 func _on_collect_area_area_entered(area):
+	if area == level.nest and height < cloud_height_1:
+		if mission_complete:
+			parent.next_phase()
+			parent.branch_count = 0
+			parent.fly_count = 0
+			parent.worm_count = 0
+	
 	match parent.phase:
 		0:
 			if area in level.partners and grounded:
 				area.queue_free()
 				parent.partner_count += 1
+				#parent.update_hud()
 				if parent.partner_count >= parent.partner_max:
 					for partner in level.partners:
 						partner.queue_free()
 					parent.next_phase()
 		1, 2, 3:
-			if area in level.branches and grounded:
+			if area in level.branches and height < branches_height:
 				if parent.branch_count < parent.branch_max:
 					area.queue_free()
 					parent.branch_count += 1
 					set_animation('collecting')
-			if area == level.nest:
-				if parent.branch_count >= parent.branch_max:
-					parent.branch_count = 0
-					parent.next_phase()
-		4, 5, 6:
+					if parent.branch_count >= parent.branch_max:
+						mission_completed()
+					#parent.update_hud()
+		4, 5:
+			if area in level.flys and height < treetop_height:
+				if parent.fly_count < parent.fly_max:
+					area.queue_free()
+					parent.fly_count += 1
+					set_animation('collecting')
+					if parent.fly_count >= parent.fly_max:
+						mission_completed()
+					#parent.update_hud()
+		6, 7:
 			if area in level.worms and grounded:
-				area.queue_free()
-				parent.worm_count += 1
-				set_animation('collecting')
-			if area == level.nest:
-				if parent.worm_count >= parent.worm_max:
-					parent.worm_count = 0
-					parent.next_phase()
+				if parent.worm_count < parent.worm_max:
+					area.queue_free()
+					parent.worm_count += 1
+					set_animation('collecting')
+					if parent.worm_count >= parent.worm_max:
+						mission_completed()
+					#parent.update_hud()
 
 func _on_animation_animation_finished():
 	if grounded:
