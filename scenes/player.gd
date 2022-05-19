@@ -4,6 +4,10 @@ onready var parent = get_parent()
 onready var animation = $animation
 onready var shadow = $shadow
 onready var arrow = $arrow
+onready var music_summer = $music_summer
+onready var music_autumn = $music_autumn
+onready var flap_sound = $bird_flapping
+onready var wind = $wind
 onready var level
 
 var dir = Vector2(0, 0)
@@ -22,7 +26,7 @@ var swing_cooltimer = 0
 
 var cloud_height_3 = 3000
 var cloud_height_2 = 2000
-var cloud_height_1 = 1150
+var cloud_height_1 = 1000
 var treetop_height = 750
 var branches_height = 500
 var ground_height = 300
@@ -37,8 +41,11 @@ var mission_complete = false
 
 func ready():
 	level = parent.level
+	
+	music_summer.playing = true
+	wind.playing = true
 
-func _process(_delta):
+func _process(_delta): 
 	inputs()
 	
 	horizontal_movement()
@@ -50,6 +57,8 @@ func _process(_delta):
 		var angel = (position - level.nest.position).normalized()
 		arrow.rotation = angel.angle() + PI/4 + PI
 		arrow.position = angel * -120
+	
+	wind_volume()
 
 func set_animation(ani):
 	animation.animation = ani
@@ -81,6 +90,7 @@ func inputs():
 			height_change = verti_speed
 			set_animation('flapping')
 			swing_cooltimer = swing_cooldown
+			flap_sound.play(0)
 	else:
 		swing_cooltimer -= 1
 	
@@ -117,8 +127,8 @@ func vertical_movement():
 	elif grounded == true:
 		grounded = false
 	
-	if new_height > cloud_height_3:
-		new_height = cloud_height_3
+	if new_height > cloud_height_2:
+		new_height = cloud_height_2
 	
 	height_change -= gravity
 	if height_change < max_fall_speed:
@@ -141,13 +151,17 @@ func mission_completed():
 	mission_complete = true
 	arrow.visible = true
 
+func wind_volume():
+	var volume = -2 + (float(height-ground_height)/float(cloud_height_1-ground_height))*9
+	wind.volume_db = clamp(volume, -2, 12.5)
+
 func _on_collect_area_area_entered(area):
 	if area == level.nest and height < treetop_height:
 		if mission_complete:
-			parent.next_phase()
 			parent.branch_count = 0
 			parent.fly_count = 0
 			parent.worm_count = 0
+			parent.next_phase()
 	
 	match parent.phase:
 		0:

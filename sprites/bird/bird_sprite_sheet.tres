@@ -16,6 +16,21 @@ flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 800, 0, 800, 800 )
 
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 800, 800 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 800, 0, 800, 800 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 1600, 0, 800, 800 )
+
 [sub_resource type="AtlasTexture" id=14]
 flags = 4
 atlas = ExtResource( 4 )
@@ -36,30 +51,20 @@ flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 2400, 0, 800, 800 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=26]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 800, 0, 800, 800 )
+atlas = ExtResource( 1 )
+region = Rect2( 2400, 0, 800, 800 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=27]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 800, 800 )
+atlas = ExtResource( 1 )
+region = Rect2( 3200, 0, 800, 800 )
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=28]
 flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 800, 800 )
-
-[sub_resource type="AtlasTexture" id=21]
-flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 800, 0, 800, 800 )
-
-[sub_resource type="AtlasTexture" id=22]
-flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 1600, 0, 800, 800 )
+atlas = ExtResource( 1 )
+region = Rect2( 4000, 0, 800, 800 )
 
 [sub_resource type="AtlasTexture" id=23]
 flags = 4
@@ -76,20 +81,15 @@ flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1600, 0, 800, 800 )
 
-[sub_resource type="AtlasTexture" id=26]
+[sub_resource type="AtlasTexture" id=19]
 flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 2400, 0, 800, 800 )
+atlas = ExtResource( 2 )
+region = Rect2( 800, 0, 800, 800 )
 
-[sub_resource type="AtlasTexture" id=27]
+[sub_resource type="AtlasTexture" id=18]
 flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 3200, 0, 800, 800 )
-
-[sub_resource type="AtlasTexture" id=28]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 4000, 0, 800, 800 )
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 800, 800 )
 
 [resource]
 animations = [ {
@@ -98,23 +98,23 @@ animations = [ {
 "name": "gliding",
 "speed": 3.0
 }, {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
-"loop": true,
-"name": "walking",
-"speed": 4.0
-}, {
-"frames": [ SubResource( 19 ), SubResource( 18 ) ],
-"loop": true,
-"name": "collecting",
-"speed": 3.0
-}, {
 "frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
 "loop": true,
 "name": "landing",
 "speed": 9.0
 }, {
-"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": true,
+"name": "walking",
+"speed": 4.0
+}, {
+"frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
 "loop": true,
 "name": "flapping",
 "speed": 12.0
+}, {
+"frames": [ SubResource( 19 ), SubResource( 18 ) ],
+"loop": true,
+"name": "collecting",
+"speed": 3.0
 } ]

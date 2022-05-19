@@ -6,12 +6,16 @@ onready var titlescreen = $Titlescreen
 onready var pause_menu = $pause_menu
 onready var control_menu = $control_menu
 onready var hud = $hud
+onready var credits = $credits
 
 func _ready():
 	for child in children:
 		child.ready()
-	#gameplay.enter() remove # when implementing menus
+	
+	#gameplay.enter()
 	#pause_menu.exit()
+	#hud.exit()
+	#credits.exit()
 	#titlescreen.enter()
 	#titlescreen.menu_camera.make_current()
 

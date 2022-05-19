@@ -29,6 +29,7 @@ func play_cutscene(animation):
 	cutscene.animation = animation
 	cutscene.playing = true
 	cutscene.visible = true
+	AnimatedSprite
 
 
 func _on_cutscenes_animation_finished():
