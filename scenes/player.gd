@@ -48,8 +48,8 @@ func _process(_delta):
 	
 	if mission_complete:
 		var angel = (position - level.nest.position).normalized()
-		arrow.rotation = angel.angle() - PI/2
-		arrow.position = angel * -100
+		arrow.rotation = angel.angle() + PI/4 + PI
+		arrow.position = angel * -120
 
 func set_animation(ani):
 	animation.animation = ani
@@ -102,7 +102,16 @@ func vertical_movement():
 	if new_height < ground_height:
 		new_height = ground_height
 		
-		if grounded == false:
+		var can_land = true
+		for pos in level.cant_spawn_here:
+			if (position.x > pos[0][0] and position.x < pos[1][0]) and (position.y > pos[0][1] and position.y < pos [1][1]):
+				can_land = false
+		
+		if can_land == false:
+			set_animation('gliding')
+			grounded = false
+		
+		if grounded == false and can_land:
 			set_animation('landing')
 			grounded = true
 		
@@ -123,6 +132,8 @@ func adjusting_shadow():
 	shadow.rotation = animation.rotation
 	shadow.frame = animation.frame
 	shadow.animation = animation.animation
+	var height_scale = 1- (float(height-ground_height)/float(cloud_height_1-ground_height))
+	shadow.scale = animation.scale * height_scale
 
 func mission_completed():
 	mission_complete = true
