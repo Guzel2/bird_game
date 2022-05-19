@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://sprites/bird/bird_sprite_sheet.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/camera.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://sprites/ground_tiles/dirt8.png" type="Texture" id=6]
 [ext_resource path="res://sprites/weather/weather.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://sprites/bird/arrow.PNG" type="Texture" id=8]
+[ext_resource path="res://sprites/cutscenes/laying_egg.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 27.0
@@ -22,6 +23,314 @@ animations = [ {
 "loop": true,
 "name": "default",
 "speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 1280, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 2560, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 3840, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 5120, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 6400, 0, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 1280, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 2560, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 3840, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 5120, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 6400, 720, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 1280, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 2560, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 3840, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 5120, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 6400, 1440, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 1280, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=34]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 2560, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=35]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 3840, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=36]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 5120, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=37]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 6400, 2160, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=38]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=39]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 1280, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=40]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 2560, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=41]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 3840, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=42]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 5120, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=43]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 6400, 2880, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=44]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=45]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 1280, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=46]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 2560, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=47]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 3840, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=48]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 5120, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=49]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 6400, 3600, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=50]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 4320, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=51]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 1280, 4320, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=52]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 2560, 4320, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=53]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 3840, 4320, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=54]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 5120, 4320, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=55]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 6400, 4320, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=56]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 5040, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=57]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 1280, 5040, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=58]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 2560, 5040, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=59]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 3840, 5040, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=60]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 5120, 5040, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=61]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 6400, 5040, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=62]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 5760, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=63]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 1280, 5760, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=64]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 2560, 5760, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=65]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 3840, 5760, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=66]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 5120, 5760, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=67]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 6400, 5760, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=68]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 6480, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=69]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 1280, 6480, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=70]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 2560, 6480, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=71]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 3840, 6480, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=72]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 5120, 6480, 1280, 720 )
+
+[sub_resource type="AtlasTexture" id=73]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 6400, 6480, 1280, 720 )
+
+[sub_resource type="SpriteFrames" id=74]
+animations = [ {
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ) ],
+"loop": true,
+"name": "laying_egg",
+"speed": 10.0
 } ]
 
 [sub_resource type="TileSet" id=11]
@@ -152,6 +461,7 @@ scale = Vector2( 0.2, 0.2 )
 z_index = 1
 frames = ExtResource( 1 )
 animation = "landing"
+frame = 1
 playing = true
 
 [node name="shadow" type="AnimatedSprite" parent="player"]
@@ -180,6 +490,11 @@ z_index = 2
 current = true
 script = ExtResource( 2 )
 
+[node name="cutscenes" type="AnimatedSprite" parent="camera"]
+visible = false
+frames = SubResource( 74 )
+animation = "laying_egg"
+
 [node name="weather" type="AnimatedSprite" parent="camera"]
 scale = Vector2( 0.65, 0.65 )
 frames = ExtResource( 7 )
@@ -196,3 +511,4 @@ format = 1
 
 [connection signal="animation_finished" from="player/animation" to="player" method="_on_animation_animation_finished"]
 [connection signal="area_entered" from="player/collect_area" to="player" method="_on_collect_area_area_entered"]
+[connection signal="animation_finished" from="camera/cutscenes" to="camera" method="_on_cutscenes_animation_finished"]

@@ -69,6 +69,7 @@ func next_phase():
 			level.nest.ani.frame = 2
 		4:
 			#level.nest.modulate = Color(1, 1, 1, 1)
+			camera.play_cutscene('laying_egg')
 			level.nest.ani.animation = 'eggs'
 		5:
 			pass
