@@ -27,7 +27,6 @@ func _process(delta):
 	dir = (current_target - position).normalized()
 	
 	speed = clamp(position.distance_to(current_target)*.05, 0, max_speed)
-	print(speed)
 	position += dir*speed*delta*60
 	
 	ani.rotation = dir.angle() + PI/2

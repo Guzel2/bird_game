@@ -78,7 +78,7 @@ func next_phase():
 		5:
 			set_autumn()
 		6:
-			camera.set_weather('rain', 45)
+			camera.set_weather('rain', -45)
 			level.nest.ani.animation = 'full'
 			level.nest.ani.playing = true
 			for worm in level.worms:
@@ -87,6 +87,7 @@ func next_phase():
 			play_cutscene('feeding_children')
 		8:
 			play_cutscene('flying_away')
+			camera.set_weather('snow', 0)
 			level.spawn_chicks()
 
 func play_cutscene(animation):
@@ -100,6 +101,8 @@ func set_autumn():
 		tree.leaves.animation = tree.leaves.animation + '_autumn'
 	player.music_summer.playing = false
 	player.music_autumn.playing = true
+	level.autumn = 1
+	level.set_tilemap_autumn()
 
 func _process(_delta):
 	if Input.is_action_pressed("ui_cancel"):

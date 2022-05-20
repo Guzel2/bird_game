@@ -9,7 +9,7 @@ var cant_spawn_here = []
 var tree_noise = OpenSimplexNoise.new()
 var tree_step_size = 250
 var tree_threshhold = .725
-var tree_range = 40000
+var tree_range = 30000
 var trees = []
 
 var dirt_threshhold = -.825
@@ -49,6 +49,11 @@ var nest
 
 var noises = []
 
+var autumn = 0
+
+var chunk_size = 1000 * 5
+var tile_amount = 9 #there are 9 different ground tiles
+
 func ready():
 	randomize()
 	player = parent.player
@@ -83,6 +88,7 @@ func ready():
 
 func _process(_delta):
 	change_height()
+	check_for_border()
 
 func spawn_nature():
 	spawn_chicks()
@@ -149,14 +155,38 @@ func set_tilemap():
 	var tile_x = -tree_range/1000
 	while tile_x < tree_range/1000:
 		var tile_y = -tree_range/1000
-		tile_x += 1
+		
 		while tile_y < tree_range/1000:
-			tile_y += 1
+			
 			tilemap.set_cell(tile_x, tile_y, numbers[pos])
 			pos += 1
 			if pos >= len(numbers):
 				pos = 0
 				numbers.shuffle()
+			tile_y += 1
+		tile_x += 1
+
+func set_tilemap_autumn():
+	var numbers = []
+	for _x in range(0, 5):
+		for y in range(0, 9):
+			numbers.append(y)
+	
+	var pos = 0
+	numbers.shuffle()
+	
+	var tile_x = -tree_range/500
+	while tile_x < tree_range/500:
+		var tile_y = -tree_range/500
+		while tile_y < tree_range/500:
+			if tilemap.get_cell(tile_x, tile_y) != -1:
+				tilemap.set_cell(tile_x, tile_y, numbers[pos]+9)
+				pos += 1
+				if pos >= len(numbers):
+					pos = 0
+					numbers.shuffle()
+			tile_y += 1
+		tile_x += 1
 
 func spawn_lake(x, y):
 	var lake = load("res://scenes/lake.tscn").instance()
@@ -398,3 +428,86 @@ func change_height():
 			
 			for cloud in clouds_2:
 				cloud.modulate = Color(1, 1, 1, cloud.transparency * transparency)
+
+func check_for_border():
+	var pos_to_check = player.position + player.dir * 8000
+	var x = floor((pos_to_check/tilemap.cell_size).x)
+	var y = floor((pos_to_check/tilemap.cell_size).y)
+	
+	if tilemap.get_cell(x, y) == -1:
+		x = floor(float(x)/(chunk_size/1000))
+		y = floor(float(y)/(chunk_size/1000))
+		var size = 3
+		for added_x in range(0, size):
+			for added_y in range(0, size):
+				generate_new_chunk((x-1+added_x)*(chunk_size/1000), (y-1+added_y)*(chunk_size/1000))
+		print(player.position)
+
+func generate_new_chunk(x, y):
+	#set_tilemap
+	var new_range = chunk_size/tilemap.cell_size.x
+	print(new_range)
+	var start_x = 0
+	var spawn_stuff = false
+	
+	var numbers = []
+	for _x in range(0, 5):
+		for y in range(0, 9):
+			numbers.append(y)
+	var pos = 0
+	numbers.shuffle()
+	
+	while start_x < new_range:
+		var start_y = 0
+		while start_y < new_range:
+			if tilemap.get_cell(x + start_x, y + start_y) == -1:
+				spawn_stuff = true
+				if !autumn:
+					tilemap.set_cell(x + start_x, y + start_y, numbers[pos])
+				else:
+					tilemap.set_cell(x + start_x, y + start_y, numbers[pos] + tile_amount)
+				pos += 1
+				if pos >= len(numbers):
+					pos = 0
+					numbers.shuffle()
+			start_y += 1
+		start_x += 1
+	
+	if spawn_stuff:
+		var tree_x = 0 + (x*tilemap.cell_size.x)
+		while tree_x < (x*tilemap.cell_size.x)+chunk_size:
+			var tree_y = 0 + (y*tilemap.cell_size.y)
+			tree_x += tree_step_size
+			while tree_y < (y*tilemap.cell_size.y)+chunk_size:
+				tree_y += tree_step_size
+				var noise_value = tree_noise.get_noise_2d(tree_x, tree_y)
+				
+				if noise_value >= tree_threshhold:
+					spawn_tree(tree_x, tree_y)
+				
+				if noise_value <= dirt_threshhold:
+					spawn_dirt_hill(tree_x, tree_y)
+				elif noise_value <= partner_threshhold:
+					spawn_partner(tree_x, tree_y)
+				elif noise_value <= deco_threshhold:
+					spawn_deco(tree_x, tree_y)
+		
+		var cloud_1_x = 0 + (x*tilemap.cell_size.x)
+		while cloud_1_x < (x*tilemap.cell_size.x)+chunk_size:
+			var cloud_1_y = 0 + (y*tilemap.cell_size.y)
+			cloud_1_x += cloud_step
+			while cloud_1_y < (y*tilemap.cell_size.y)+chunk_size:
+				cloud_1_y += cloud_step
+				var noise_value = cloud_noise.get_noise_2d(cloud_1_x, cloud_1_y)
+				if noise_value <= cloud_threshhold:
+					spawn_cloud(cloud_1_x, cloud_1_y, 1)
+		
+		var cloud_2_x = 0 + (x*tilemap.cell_size.x)
+		while cloud_2_x < (x*tilemap.cell_size.x)+chunk_size:
+			var cloud_2_y = 0 + (y*tilemap.cell_size.y)
+			cloud_2_x += cloud_2_step
+			while cloud_2_y < (y*tilemap.cell_size.y)+chunk_size:
+				cloud_2_y += cloud_2_step
+				var noise_value = cloud_2_noise.get_noise_2d(cloud_2_x, cloud_2_y)
+				if noise_value <= cloud_2_threshhold:
+					spawn_cloud(cloud_2_x, cloud_2_y, 1)
