@@ -19,6 +19,11 @@ func _ready():
 	#	child.rotation_degrees = randi() % 360
 	
 	animation_timer = base_time + randi() % added_time
+	
+	if frame == 1:
+		tree_log.frame = 1
+		tree_branches.frame = 1
+		leaves.animation = leaves.animation + '_autumn'
 
 func _process(_delta):
 	if animation_timer > 1:

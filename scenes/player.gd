@@ -40,6 +40,8 @@ var shadow_offset = Vector2(-10, 10)
 
 var mission_complete = false
 
+var game_finished = false
+
 func ready():
 	level = parent.level
 	
@@ -49,7 +51,7 @@ func ready():
 func _process(_delta):
 	if parent.phase == 8:
 		if position.y > 80000:
-			print('end_game')
+			game_finished = true
 	inputs()
 	
 	horizontal_movement()
@@ -94,6 +96,7 @@ func inputs():
 			height_change = verti_speed
 			set_animation('flapping')
 			swing_cooltimer = swing_cooldown
+			flap_sound.pitch_scale = float(90 + randi() % 20)/100
 			flap_sound.play(0)
 	else:
 		swing_cooltimer -= 1
@@ -156,7 +159,7 @@ func mission_completed():
 
 func wind_volume():
 	var volume = -2 + (float(height-ground_height)/float(cloud_height_1-ground_height))*9
-	wind.volume_db = clamp(volume, -2, 12)
+	wind.volume_db = clamp(volume, -2, 10)
 
 func noise_volume():
 	var volume = 0 - (float(height-ground_height)/float(cloud_height_1-ground_height))*9
@@ -178,8 +181,6 @@ func _on_collect_area_area_entered(area):
 				for noise in len(level.noises):
 					if level.noises[noise].get_parent() == area:
 						need_to_remove = noise
-						
-						print('test')
 				level.noises.remove(need_to_remove)
 				area.queue_free()
 				parent.partner_count += 1

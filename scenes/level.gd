@@ -91,11 +91,10 @@ func _process(_delta):
 	check_for_border()
 
 func spawn_nature():
-	spawn_chicks()
 	set_tilemap()
 	
 	#lake
-	for _x in range(0, 5):
+	for _x in range(0, 6):
 		spawn_lake(-tree_range + (randi() % tree_range*2), -tree_range + (randi() % tree_range*2))
 	
 	#spawn_field(0, 0)
@@ -257,6 +256,9 @@ func spawn_tree(x, y):
 			2:
 				tree.animation = 'pine'
 		
+		if autumn:
+			tree.frame = 1
+		
 		trees.append(tree)
 		spawn_branches(tree, x, y)
 		add_child(tree)
@@ -310,7 +312,8 @@ func spawn_worms(x, y):
 				worm.position = Vector2(worm_x + x, worm_y + y)
 				worm.rotation_degrees = randi() % 360
 				worms.append(worm)
-				worm.visible = false
+				if autumn == 0:
+					worm.visible = false
 				add_child(worm)
 
 func spawn_partner(x, y):
@@ -430,7 +433,9 @@ func change_height():
 				cloud.modulate = Color(1, 1, 1, cloud.transparency * transparency)
 
 func check_for_border():
+	#for super_x in range(-1, 2):
 	var pos_to_check = player.position + player.dir * 8000
+	#pos_to_check += pos_to_check + (pos_to_check.rotated(PI/2)* (super_x*chunk_size))
 	var x = floor((pos_to_check/tilemap.cell_size).x)
 	var y = floor((pos_to_check/tilemap.cell_size).y)
 	
@@ -441,12 +446,10 @@ func check_for_border():
 		for added_x in range(0, size):
 			for added_y in range(0, size):
 				generate_new_chunk((x-1+added_x)*(chunk_size/1000), (y-1+added_y)*(chunk_size/1000))
-		print(player.position)
 
 func generate_new_chunk(x, y):
 	#set_tilemap
 	var new_range = chunk_size/tilemap.cell_size.x
-	print(new_range)
 	var start_x = 0
 	var spawn_stuff = false
 	

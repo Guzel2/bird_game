@@ -57,7 +57,6 @@ func check_titlescreen(): #neue funktion um zu überprüfen ob sich das game im 
 
 func next_phase():
 	phase += 1
-	print('next_phase')
 	player.mission_complete = false
 	player.arrow.visible = false
 	#update_hud()
@@ -99,8 +98,8 @@ func set_autumn():
 		tree.tree_log.frame = 1
 		tree.tree_branches.frame = 1
 		tree.leaves.animation = tree.leaves.animation + '_autumn'
-	player.music_summer.playing = false
-	player.music_autumn.playing = true
+	player.music_summer.fade_out()
+	player.music_autumn.fade_in()
 	level.autumn = 1
 	level.set_tilemap_autumn()
 

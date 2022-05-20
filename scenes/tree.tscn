@@ -31,21 +31,6 @@
 [ext_resource path="res://sprites/trees/birch_leaves/Birch Leaves A 3.PNG" type="Texture" id=29]
 [ext_resource path="res://sprites/trees/birch_leaves/Birch Leaves A 4.PNG" type="Texture" id=30]
 
-[sub_resource type="AtlasTexture" id=15]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 1000, 1000 )
-
-[sub_resource type="AtlasTexture" id=16]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 1000, 0, 1000, 1000 )
-
-[sub_resource type="AtlasTexture" id=17]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 1000, 1000 )
-
 [sub_resource type="AtlasTexture" id=31]
 flags = 4
 atlas = ExtResource( 1 )
@@ -56,11 +41,26 @@ flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1000, 0, 1000, 1000 )
 
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1000, 0, 1000, 1000 )
+
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 15 ), SubResource( 16 ) ],
+"frames": [ SubResource( 31 ), SubResource( 32 ) ],
 "loop": true,
-"name": "oak",
+"name": "birch",
 "speed": 0.0
 }, {
 "frames": [ SubResource( 17 ), SubResource( 17 ) ],
@@ -68,26 +68,11 @@ animations = [ {
 "name": "pine",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 31 ), SubResource( 32 ) ],
+"frames": [ SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
-"name": "birch",
+"name": "oak",
 "speed": 0.0
 } ]
-
-[sub_resource type="AtlasTexture" id=21]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 1000, 1000, 1000 )
-
-[sub_resource type="AtlasTexture" id=22]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 1000, 1000, 1000, 1000 )
-
-[sub_resource type="AtlasTexture" id=23]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 1000, 1000, 1000 )
 
 [sub_resource type="AtlasTexture" id=33]
 flags = 4
@@ -99,11 +84,26 @@ flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1000, 1000, 1000, 1000 )
 
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 1000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 1000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1000, 1000, 1000, 1000 )
+
 [sub_resource type="SpriteFrames" id=14]
 animations = [ {
-"frames": [ SubResource( 21 ), SubResource( 22 ) ],
+"frames": [ SubResource( 33 ), SubResource( 34 ) ],
 "loop": true,
-"name": "oak",
+"name": "birch",
 "speed": 0.0
 }, {
 "frames": [ SubResource( 23 ), SubResource( 23 ) ],
@@ -111,26 +111,11 @@ animations = [ {
 "name": "pine",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 33 ), SubResource( 34 ) ],
+"frames": [ SubResource( 21 ), SubResource( 22 ) ],
 "loop": true,
-"name": "birch",
+"name": "oak",
 "speed": 0.0
 } ]
-
-[sub_resource type="AtlasTexture" id=27]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 2000, 1000, 1000 )
-
-[sub_resource type="AtlasTexture" id=28]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 1000, 2000, 1000, 1000 )
-
-[sub_resource type="AtlasTexture" id=29]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 2000, 1000, 1000 )
 
 [sub_resource type="AtlasTexture" id=35]
 flags = 4
@@ -142,11 +127,26 @@ flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1000, 2000, 1000, 1000 )
 
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 2000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 2000, 1000, 1000 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1000, 2000, 1000, 1000 )
+
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 27 ), SubResource( 28 ) ],
+"frames": [ SubResource( 35 ), SubResource( 36 ) ],
 "loop": true,
-"name": "oak",
+"name": "birch",
 "speed": 0.0
 }, {
 "frames": [ SubResource( 29 ), SubResource( 29 ) ],
@@ -154,14 +154,24 @@ animations = [ {
 "name": "pine",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 35 ), SubResource( 36 ) ],
+"frames": [ SubResource( 27 ), SubResource( 28 ) ],
 "loop": true,
-"name": "birch",
+"name": "oak",
 "speed": 0.0
 } ]
 
 [sub_resource type="SpriteFrames" id=37]
 animations = [ {
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "birch",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "pine",
+"speed": 7.0
+}, {
 "frames": [ ExtResource( 25 ), ExtResource( 24 ), ExtResource( 21 ), ExtResource( 23 ), ExtResource( 22 ) ],
 "loop": true,
 "name": "oak_autumn",
@@ -172,25 +182,15 @@ animations = [ {
 "name": "pine_autumn",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 7 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "oak",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 27 ), ExtResource( 26 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 28 ) ],
 "loop": true,
 "name": "birch_autumn",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 7 ), ExtResource( 11 ) ],
 "loop": true,
-"name": "pine",
-"speed": 7.0
-}, {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
-"loop": true,
-"name": "birch",
-"speed": 7.0
+"name": "oak",
+"speed": 5.0
 } ]
 
 [node name="tree" type="AnimatedSprite"]
@@ -212,6 +212,7 @@ animation = "pine"
 scale = Vector2( 0.7, 0.7 )
 frames = SubResource( 37 )
 animation = "pine_autumn"
+frame = 1
 playing = true
 flip_h = true
 
