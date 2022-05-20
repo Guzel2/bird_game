@@ -88,10 +88,9 @@ func spawn_nature():
 	set_tilemap()
 	
 	#lake
-	for x in range(0, 5):
+	for _x in range(0, 5):
 		spawn_lake(-tree_range + (randi() % tree_range*2), -tree_range + (randi() % tree_range*2))
 	
-	print(len(flys))
 	#spawn_field(0, 0)
 	
 	#trees
@@ -173,7 +172,7 @@ func spawn_lake(x, y):
 	for child in lake.get_children():
 		if 'Audio' in child.name:
 			noises.append(child)
-			child.position = offset/2
+			child.position = offset/4
 			child.play(randi() % 60)
 	add_child(lake)
 	

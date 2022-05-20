@@ -15,7 +15,7 @@ var dir = Vector2(0, 0)
 var old_dir = Vector2(0, 0)
 var hori_speed = 400
 
-var height = 300
+var height = 310
 var new_height = height
 var height_change = -1
 var gravity = .22
@@ -168,7 +168,6 @@ func wind_volume():
 
 func noise_volume():
 	var volume = 0 - (float(height-ground_height)/float(cloud_height_1-ground_height))*9
-	print(clamp(volume, -20, 0))
 	for noise in level.noises:
 		noise.volume_db = volume
 
@@ -183,6 +182,13 @@ func _on_collect_area_area_entered(area):
 	match parent.phase:
 		0:
 			if area in level.partners and height < treetop_height:
+				var need_to_remove = 0
+				for noise in len(level.noises):
+					if level.noises[noise].get_parent() == area:
+						need_to_remove = noise
+						
+						print('test')
+				level.noises.remove(need_to_remove)
 				area.queue_free()
 				parent.partner_count += 1
 				#parent.update_hud()

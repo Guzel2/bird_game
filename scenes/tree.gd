@@ -20,7 +20,7 @@ func _ready():
 	
 	animation_timer = base_time + randi() % added_time
 
-func _process(delta):
+func _process(_delta):
 	if animation_timer > 1:
 		animation_timer -= 1
 	elif animation_timer == 1:

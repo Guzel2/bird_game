@@ -1042,6 +1042,7 @@ scale = Vector2( 0.2, 0.2 )
 z_index = 1
 frames = ExtResource( 1 )
 animation = "landing"
+frame = 2
 playing = true
 
 [node name="shadow" type="AnimatedSprite" parent="player"]
@@ -1089,8 +1090,6 @@ visible = false
 z_index = 10
 frames = SubResource( 74 )
 animation = "laying_egg"
-frame = 22
-playing = true
 
 [node name="weather" type="AnimatedSprite" parent="camera"]
 scale = Vector2( 0.65, 0.65 )

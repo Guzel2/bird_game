@@ -7,12 +7,16 @@ onready var pause_menu = $pause_menu
 onready var control_menu = $control_menu
 onready var hud = $hud
 onready var credits = $credits
+onready var logo = $logo_animation
 
 func _ready():
+	logo.ready()
+
+func ready():
 	for child in children:
 		child.ready()
 	
-	#gameplay.enter()
+	gameplay.enter()
 	#pause_menu.exit()
 	#hud.exit()
 	#credits.exit()

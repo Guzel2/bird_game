@@ -23,6 +23,9 @@ var worm_max = 4
 
 var space = '          '
 
+func _ready():
+	exit()
+
 func ready():
 	for child in children:
 		child.ready()
@@ -38,10 +41,10 @@ func exit():
 		child.set_process(false)
 
 func enter():
-	update_hud()
-	update_count()
-	in_titlescreen = false #muss auf false gesetzt werden damit es visible wird
-	self.visible = true
+	#update_hud()
+	#update_count()
+	#in_titlescreen = false #muss auf false gesetzt werden damit es visible wird
+	visible = true
 	set_process(true)
 	for child in children:
 		child.set_process(true)
