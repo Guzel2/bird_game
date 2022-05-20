@@ -4,6 +4,7 @@ onready var parent = get_parent()
 onready var animation = $animation
 onready var shadow = $shadow
 onready var arrow = $arrow
+onready var collect_area = $collect_area
 onready var music_summer = $music_summer
 onready var music_autumn = $music_autumn
 onready var flap_sound = $bird_flapping
@@ -14,7 +15,7 @@ var dir = Vector2(0, 0)
 var old_dir = Vector2(0, 0)
 var hori_speed = 400
 
-var height = 1000
+var height = 300
 var new_height = height
 var height_change = -1
 var gravity = .22
@@ -59,6 +60,7 @@ func _process(_delta):
 		arrow.position = angel * -120
 	
 	wind_volume()
+	noise_volume()
 
 func set_animation(ani):
 	animation.animation = ani
@@ -80,6 +82,9 @@ func inputs():
 	and !(Input.is_action_pressed("ui_up")) 
 	and !(Input.is_action_pressed("ui_down"))):
 		old_dir = dir
+		max_fall_speed = -3
+	else:
+		max_fall_speed = -15
 	
 	#if Input.is_action_pressed("fly_up"):
 	#	new_height += verti_speed
@@ -130,6 +135,12 @@ func vertical_movement():
 	if new_height > cloud_height_2:
 		new_height = cloud_height_2
 	
+	if new_height > treetop_height and collect_area.monitoring == true:
+		collect_area.monitoring = false
+	
+	if new_height < treetop_height and collect_area.monitoring == false:
+		collect_area.monitoring = true
+	
 	height_change -= gravity
 	if height_change < max_fall_speed:
 		height_change = max_fall_speed
@@ -153,7 +164,13 @@ func mission_completed():
 
 func wind_volume():
 	var volume = -2 + (float(height-ground_height)/float(cloud_height_1-ground_height))*9
-	wind.volume_db = clamp(volume, -2, 12.5)
+	wind.volume_db = clamp(volume, -2, 12)
+
+func noise_volume():
+	var volume = 0 - (float(height-ground_height)/float(cloud_height_1-ground_height))*9
+	print(clamp(volume, -20, 0))
+	for noise in level.noises:
+		noise.volume_db = volume
 
 func _on_collect_area_area_entered(area):
 	if area == level.nest and height < treetop_height:
@@ -165,16 +182,16 @@ func _on_collect_area_area_entered(area):
 	
 	match parent.phase:
 		0:
-			if area in level.partners and grounded:
+			if area in level.partners and height < treetop_height:
 				area.queue_free()
 				parent.partner_count += 1
 				#parent.update_hud()
 				if parent.partner_count >= parent.partner_max:
-					for partner in level.partners:
-						partner.queue_free()
+					#for partner in level.partners:
+					#	partner.queue_free()
 					parent.next_phase()
 		1, 2, 3:
-			if area in level.branches and height < branches_height:
+			if area in level.branches and height < treetop_height:
 				if parent.branch_count < parent.branch_max:
 					area.queue_free()
 					parent.branch_count += 1
@@ -192,7 +209,7 @@ func _on_collect_area_area_entered(area):
 						mission_completed()
 					#parent.update_hud()
 		6, 7:
-			if area in level.worms and grounded:
+			if area in level.worms and height < treetop_height:
 				if parent.worm_count < parent.worm_max:
 					area.queue_free()
 					parent.worm_count += 1

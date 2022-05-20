@@ -47,6 +47,8 @@ var deco_threshhold = -.725
 
 var nest
 
+var noises = []
+
 func ready():
 	randomize()
 	player = parent.player
@@ -168,6 +170,11 @@ func spawn_lake(x, y):
 		1:
 			offset = Vector2(6000, 6000)
 	cant_spawn_here.append([[x, y], [x + offset.x, y + offset.y]])
+	for child in lake.get_children():
+		if 'Audio' in child.name:
+			noises.append(child)
+			child.position = offset/2
+			child.play(randi() % 60)
 	add_child(lake)
 	
 	spawn_flys(x, y, offset)
@@ -281,12 +288,15 @@ func spawn_partner(x, y):
 	for pos in cant_spawn_here:
 		if (x > pos[0][0] and x < pos[1][0]) and (y > pos[0][1] and y < pos [1][1]):
 			can_spawn = false
-	
 	if can_spawn == true:
 		var partner = load("res://scenes/partner.tscn").instance()
 		partner.position = Vector2(x, y)
 		partner.rotation_degrees = randi() % 360
 		partners.append(partner)
+		for child in partner.get_children():
+			if 'Audio' in child.name:
+				noises.append(child)
+				child.play(randi() % 20)
 		add_child(partner)
 
 func spawn_deco(x, y):
