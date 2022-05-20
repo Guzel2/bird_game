@@ -85,6 +85,7 @@ func _process(_delta):
 	change_height()
 
 func spawn_nature():
+	spawn_chicks()
 	set_tilemap()
 	
 	#lake
@@ -345,6 +346,22 @@ func spawn_nest():
 	new_nest.position = closest_tree.position
 	nest = new_nest
 	add_child(new_nest)
+
+func spawn_chicks():
+	for x in range(0, 4):
+		var chick = load("res://scenes/chick.tscn").instance()
+		chick.player = player
+		match x:
+			0:
+				chick.target_position = Vector2(-250, 10)
+			1:
+				chick.target_position = Vector2(-130, 0)
+			2:
+				chick.target_position = Vector2(130, 0)
+			3:
+				chick.target_position = Vector2(250, 10)
+		chick.max_speed = player.hori_speed * 1.25
+		add_child(chick)
 
 func change_height():
 	if player.height != player.new_height:

@@ -87,6 +87,7 @@ func next_phase():
 			play_cutscene('feeding_children')
 		8:
 			play_cutscene('flying_away')
+			level.spawn_chicks()
 
 func play_cutscene(animation):
 	camera.play_cutscene(animation)
